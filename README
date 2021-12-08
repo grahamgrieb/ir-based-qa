@@ -1,0 +1,19 @@
+A information based Question Answering system. Takes in a question, finds the most related passage among the Wikipedia based SQuAD dataset, and then extracts the most likely answer from the passage using pretrained model.
+
+Can be found on Quest under /projects/e31408/users/gmg0603/project
+
+To activate conda environment on NU quest server:  source activate /projects/e31408/users/gmg0603/project/env
+
+Description of Files:
+reader.py: the reader part of the QA system
+retrieval.py: the retrieval part of the QA system, uses pretrained BERT transformer model
+data/
+  dev-v2.0.json and train-v2.0.json: original SQuAD datasets
+  create_data.py: used to the compile the passages used for the qa's in dev-v2.0.json and train-v2.0.json into dev_articles.json and train_articles.json
+  dev_articles.json and train_articles.json: json of just the articles from each dataset to be used by the reader.py
+results/
+  create_predictions.py: used to create file for evaluation script. creates the predictions of answers for all of the questions using the retrieval part given the true passages corresponding to the questions in the squad dataset.
+  create_predictions_with_top_retriever: used to create file for evaluation script. uses predicted passages unlike previous file. first uses reader.py to find all top scoring passages for each question and then passes those question and passages to the retriever.
+  create_predictions_with_topn_retriever: used to create file for evaluation script. like previous file but uses the top 5 scoring passages and then lets the reader choose the best answer from those 5.
+  jobscipt's: used to run 3 previous files on NU quest server using cluster gpu's. First two take 30 minutes each. Third one can take up to 3 hours. Use "sbatch jobscript.sh" to run
+env folder: holds the conda environment

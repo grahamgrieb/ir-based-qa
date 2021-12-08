@@ -76,9 +76,9 @@ class Retrieval:
         return nlargest(n, scores, key = scores.get)
         
 if __name__ == '__main__':
-   a=Retrieval('data/dev_articles.json')
-   #a=Retrieval('data/train_articles.json')
+   #a=Retrieval('data/dev_articles.json')
+   a=Retrieval('data/train_articles.json')
    a.get_counts()
-   #print(a.top_n_results("Where was John Kerry born?",10))
-   print(a.top_n_results("When was Harvard founded?",1))
+   print(a.top_n_results("Where was John Kerry born?",10))
+   #print(a.top_n_results("Who did Rollo sign the treaty of Saint-Clair-sur-Epte with?",1))
 
